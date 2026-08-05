@@ -13,11 +13,11 @@ class AuthService {
     static async register(data: RegisterInput) {
         await connectDB();
 
-        const existinguser = await User.findOne({
+        const existingUser = await User.findOne({
             email: data.email,
         });
 
-        if(existinguser) {
+        if(existingUser) {
             throw new Error("An account with this email already exists.");
         }
 
@@ -28,11 +28,14 @@ class AuthService {
         });
 
         return {
-            id: user._id,
+            id: user._id.toString(),
             name: user.name,
             email: user.email,
+            avatarUrl: user.avatarUrl ?? null,
             globalXp: user.globalXp,
-            activeCareerProfileId: user.activeCareerProfileId?.toString() ?? null,
+            activeCareerProfileId:
+                user.activeCareerProfileId?.toString() ?? null,
+            createdAt: user.createdAt.toISOString(),
         };
     }
 
@@ -57,8 +60,11 @@ class AuthService {
             id: user._id.toString(),
             name: user.name,
             email: user.email,
+            avatarUrl: user.avatarUrl ?? null,
             globalXp: user.globalXp,
-            activeCareerProfileId: user.activeCareerProfileId?.toString() ?? null,
+            activeCareerProfileId:
+                user.activeCareerProfileId?.toString() ?? null,
+            createdAt: user.createdAt.toISOString(),
         };
     }
 

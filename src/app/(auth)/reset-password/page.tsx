@@ -1,13 +1,21 @@
+import { Loader2 } from "lucide-react";
+import { Suspense } from "react";
+
+import ResetPasswordForm from "@/components/auth/ResetPasswordForm";
+
 export default function ResetPasswordPage() {
   return (
-    <div className="text-center">
-      <h1 className="text-2xl font-bold sm:text-3xl">
-        Reset your password
-      </h1>
-
-      <p className="mt-2 text-sm text-slate-400">
-        The new-password form will be added here.
-      </p>
-    </div>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center py-12">
+          <Loader2
+            size={28}
+            className="animate-spin text-violet-400"
+          />
+        </div>
+      }
+    >
+      <ResetPasswordForm />
+    </Suspense>
   );
 }

@@ -100,12 +100,8 @@ export const forgotPasswordSchema = z.object({
     .toLowerCase(),
 });
 
-export const resetPasswordSchema = z
+export const resetPasswordFormSchema = z
   .object({
-    token: z
-      .string()
-      .min(1, "Reset token is required."),
-
     newPassword: z
       .string()
       .min(8, "New password must be at least 8 characters.")
@@ -118,13 +114,17 @@ export const resetPasswordSchema = z
     confirmNewPassword: z.string(),
   })
   .refine(
-    (data) =>
-      data.newPassword === data.confirmNewPassword,
+    (data) => data.newPassword === data.confirmNewPassword,
     {
       message: "New passwords do not match.",
       path: ["confirmNewPassword"],
     }
   );
+
+export const resetPasswordSchema =
+  resetPasswordFormSchema.extend({
+    token: z.string().min(1, "Reset token is required."),
+  });
 
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
@@ -132,4 +132,5 @@ export type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
 export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
 export type DeleteAccountInput = z.infer<typeof deleteAccountSchema>;
 export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
+export type ResetPasswordFormInput = z.infer<typeof resetPasswordFormSchema>;
 export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
