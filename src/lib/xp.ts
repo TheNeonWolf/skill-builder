@@ -26,3 +26,8 @@ export function calculateTaskXp(
     const rawXp = baseXp * multiplier + timeBonus;
     return Math.round(rawXp / 10) * 10;
 }
+
+export function calculateLevelFromXp(xp: number): number {
+    const safeXp = Math.max(0, xp);
+    return Math.floor(Math.sqrt(safeXp / 1000)) + 1;
+}

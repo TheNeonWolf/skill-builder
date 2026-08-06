@@ -41,8 +41,7 @@ function createTask(
     checklist: task.checklist.map((title) => ({
       title,
       completed: false,
-      completedAt: null,
-      xpAwarded: false,
+      completedAt: null
     })),
   };
 }

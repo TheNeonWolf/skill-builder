@@ -308,6 +308,27 @@ export default function OnboardingForm() {
         return;
       }
 
+      /*
+      * The career profile now exists, so generate its initial roadmap.
+      */
+      const roadmapResponse = await fetch("/api/roadmaps", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      const roadmapResult = (await roadmapResponse.json()) as {
+        success: boolean;
+        message?: string;
+      };
+
+      if (!roadmapResponse.ok || !roadmapResult.success) {
+        setServerError(
+          roadmapResult.message ??
+            "Your career profile was created, but the roadmap could not be generated."
+        );
+        return;
+      }
+
       await refreshUser();
 
       router.push("/dashboard");
@@ -812,7 +833,7 @@ export default function OnboardingForm() {
                       size={18}
                       className="animate-spin"
                     />
-                    Creating profile...
+                    Building your career path...
                   </>
                 ) : (
                   <>

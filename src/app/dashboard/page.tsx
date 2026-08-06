@@ -2,7 +2,7 @@
 
 import { Loader2, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function DashboardPage() {
@@ -77,6 +77,13 @@ export default function DashboardPage() {
               Active
             </p>
           </article>
+
+          <Link
+            href="/roadmap"
+            className="mt-8 inline-flex rounded-xl bg-violet-500 px-5 py-3 font-semibold transition hover:bg-violet-400"
+          >
+            View my roadmap
+          </Link>
         </div>
       </div>
     </main>

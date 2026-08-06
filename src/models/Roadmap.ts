@@ -53,7 +53,6 @@ export interface IChecklistItem {
   title: string;
   completed: boolean;
   completedAt: Date | null;
-  xpAwarded: boolean;
 }
 
 export interface IRoadmapTask {
@@ -133,12 +132,7 @@ const checklistItemSchema =
       completedAt: {
         type: Date,
         default: null,
-      },
-
-      xpAwarded: {
-        type: Boolean,
-        default: false,
-      },
+      }
     }
   );
 
